@@ -15,7 +15,7 @@ const openaiRoutes = require('./routes/openaiRoutes');
 // Setup
 const app = express();
 const PORT = process.env.PORT || 5001;
-const FRONTEND_URL = process.env.FRONTEND_URL || 'http://localhost:3000';
+const FRONTEND_URL = process.env.FRONTEND_URL || 'http://unifostedu.com';
 const corsOrigins = FRONTEND_URL.split(',').map(origin => origin.trim());
 
 // Middleware
