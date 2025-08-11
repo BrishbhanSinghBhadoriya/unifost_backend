@@ -81,7 +81,7 @@ exports.register = async (req, res) => {
       phone,
       course,
       university,
-      qualification, // spelling kept for schema compatibility
+      qualification, 
       experience,
     });
     await newLead.save();
