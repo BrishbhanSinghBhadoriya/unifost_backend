@@ -5,6 +5,7 @@ const cors = require('cors');
 const connectDB = require('./Config/db');
 const errorHandler = require('./Middleware/errorHandler');
 
+
 // Import routes
 const authRoutes = require('./routes/authRoutes');
 const enquiryRoutes = require('./routes/enquiryRoutes');
@@ -15,15 +16,28 @@ const openaiRoutes = require('./routes/openaiRoutes');
 // Setup
 const app = express();
 const PORT = process.env.PORT || 5001;
-const FRONTEND_URL = process.env.FRONTEND_URL || 'http://unifostedu.com';
-const corsOrigins = FRONTEND_URL.split(',').map(origin => origin.trim());
+
+// Allowed origins for CORS
+const allowedOrigins = [
+  'https://unifostedu.com',
+  'http://unifostedu.com',
+  'http://localhost:3000'
+];
 
 // Middleware
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
+
+// Dynamic CORS handling
 app.use(cors({
-  origin: corsOrigins,
+  origin: function (origin, callback) {
+    // Allow no-origin requests (Postman, curl) or matching origins
+    if (!origin || allowedOrigins.includes(origin)) {
+      return callback(null, true);
+    }
+    callback(new Error(`CORS blocked for origin: ${origin}`));
+  },
   credentials: true
 }));
 
@@ -49,10 +63,10 @@ app.get('/', (req, res) => {
 
 // 404 handler
 app.use((req, res) => {
-  res.status(404).json({ 
-    success: false, 
-    message: 'Route not found', 
-    path: req.originalUrl 
+  res.status(404).json({
+    success: false,
+    message: 'Route not found',
+    path: req.originalUrl
   });
 });
 
@@ -63,8 +77,8 @@ app.use(errorHandler);
 const startServer = async () => {
   try {
     await connectDB();
-    
-    // 🔥 IMPORTANT: Use 0.0.0.0 for Render hosting!
+
+    // Use 0.0.0.0 for Render hosting
     app.listen(PORT, '0.0.0.0', () => {
       console.log(`\n✅ Server is running on port ${PORT}`);
     });

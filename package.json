@@ -24,8 +24,8 @@
     "express-validator": "^7.2.1",
     "joi": "^17.13.3",
     "jsonwebtoken": "^9.0.2",
-    "mongodb": "^6.17.0",
-    "mongoose": "^8.15.1",
+    "mongodb": "^6.18.0",
+    "mongoose": "^8.3.4",
     "openai": "^5.8.2",
     "react-router-dom": "^7.6.2"
   },

@@ -12,7 +12,7 @@ const getChatResponse = async (prompt) => {
   {
     headers: {
       'Authorization': `Bearer ${process.env.OPENROUTER_API_KEY}`,
-      'HTTP-Referer': process.env.FRONTEND_URL || 'http://localhost:3000',
+      'HTTP-Referer': process.env.FRONTEND_URL || 'https://unifostedu.com',
       'Content-Type': 'application/json'
     }
   }
