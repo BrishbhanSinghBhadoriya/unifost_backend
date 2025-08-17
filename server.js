@@ -20,7 +20,7 @@ const PORT = process.env.PORT || 5001;
 // Allowed origins for CORS
 const allowedOrigins = [
   'https://unifostedu.com',
-  'http://unifostedu.com',
+  
   'http://localhost:3000'
 ];
 
